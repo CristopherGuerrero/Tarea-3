@@ -1,0 +1,10 @@
+# Dependencias de Node
+node_modules/
+
+# builds de producción
+dist/
+build/
+
+# Archivos de entorno
+.env
+.env.local
