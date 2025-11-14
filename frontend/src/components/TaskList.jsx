@@ -9,13 +9,16 @@ function TaskList({ tasks, onEdit, onDelete }) {
       ? tasks
       : tasks.filter((t) => t.status === filter);
 
+  const totalTareas = tasks.length;
+  const totalFiltradas = filteredTasks.length;
+
   return (
     <div>
       <h2>Listado de tareas</h2>
 
       {/* ===== FILTRO POR ESTADO ===== */}
-      <div style={{ marginBottom: "1rem" }}>
-        <label style={{ marginRight: "0.5rem" }}>Filtrar por estado:</label>
+      <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+        <label>Filtrar tareas por estado:</label>
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
@@ -25,6 +28,9 @@ function TaskList({ tasks, onEdit, onDelete }) {
           <option value="en-progreso">En progreso</option>
           <option value="completada">Completada</option>
         </select>
+        <span style={{ fontSize: "0.9rem", color: "#555" }}>
+          Mostrando <strong>{totalFiltradas}</strong> de <strong>{totalTareas}</strong> tareas
+        </span>
       </div>
 
       {/* ===== MENSAJE SI NO HAY TAREAS ===== */}
