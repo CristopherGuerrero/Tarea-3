@@ -8,7 +8,6 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
 
-  // Cargar tareas al iniciar
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -76,8 +75,13 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '1rem' }}>
-      <h1>Gestor de Tareas</h1>
+    <div className="container">
+      <h1>Gestor de Tareas CRUD</h1>
+      <p style={{ marginBottom: '1rem', color: '#555' }}>
+        Administra tus tareas: crea nuevas actividades, actualiza su estado
+        y elimina las que ya no necesites.
+      </p>
+
       <TaskForm
         onCreate={handleCreate}
         onUpdate={handleUpdate}
