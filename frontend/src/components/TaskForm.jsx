@@ -20,6 +20,12 @@ function TaskForm({ onCreate, onUpdate, editingTask, onCancelEdit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validación mínima (opcional, el required del textarea ya ayuda)
+    if (description.trim() === "") {
+      alert("La descripción es obligatoria");
+      return;
+    }
+
     const data = { title, description, status };
 
     if (editingTask) {
@@ -32,6 +38,7 @@ function TaskForm({ onCreate, onUpdate, editingTask, onCancelEdit }) {
   return (
     <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
       <h2>{editingTask ? 'Editar tarea' : 'Nueva tarea'}</h2>
+
       <div>
         <label>Título:</label><br />
         <input
@@ -41,14 +48,32 @@ function TaskForm({ onCreate, onUpdate, editingTask, onCancelEdit }) {
           required
         />
       </div>
-      <div>
+
+      <div style={{ marginTop: "0.5rem" }}>
         <label>Descripción:</label><br />
+
+        {/* Textarea actualizado */}
         <textarea
           value={description}
           onChange={e => setDescription(e.target.value)}
+          required
+          placeholder="Escribe una descripción..."
+          style={{
+            borderColor: description.trim() === "" ? "red" : "#ccc",
+            width: "100%",
+            minHeight: "60px"
+          }}
         />
+
+        {/* Mensaje de error */}
+        {description.trim() === "" && (
+          <p style={{ color: "red", fontSize: "0.8rem", marginTop: "0.25rem" }}>
+            La descripción es obligatoria.
+          </p>
+        )}
       </div>
-      <div>
+
+      <div style={{ marginTop: "0.5rem" }}>
         <label>Estado:</label><br />
         <select
           value={status}
@@ -59,9 +84,11 @@ function TaskForm({ onCreate, onUpdate, editingTask, onCancelEdit }) {
           <option value="completada">Completada</option>
         </select>
       </div>
+
       <button type="submit" style={{ marginTop: '0.5rem' }}>
         {editingTask ? 'Actualizar' : 'Crear'}
       </button>
+
       {editingTask && (
         <button
           type="button"
