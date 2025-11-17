@@ -3,7 +3,6 @@ import { useState } from "react";
 function TaskList({ tasks, onEdit, onDelete }) {
   const [filter, setFilter] = useState("todos");
 
-  // Filtrar tareas según estado seleccionado
   const filteredTasks =
     filter === "todos"
       ? tasks
@@ -12,12 +11,32 @@ function TaskList({ tasks, onEdit, onDelete }) {
   const totalTareas = tasks.length;
   const totalFiltradas = filteredTasks.length;
 
+  // Caso especial: no hay ninguna tarea creada todavía
+  if (totalTareas === 0) {
+    return (
+      <div>
+        <h2>Listado de tareas</h2>
+        <p>
+          No hay tareas registradas todavía. Crea tu primera tarea usando el
+          formulario de arriba.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <h2>Listado de tareas</h2>
 
       {/* Filtro por estado */}
-      <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+      <div
+        style={{
+          marginBottom: "1rem",
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+        }}
+      >
         <label>Filtrar tareas por estado:</label>
         <select
           value={filter}
@@ -34,13 +53,23 @@ function TaskList({ tasks, onEdit, onDelete }) {
         </span>
       </div>
 
-      {/* Texto informativo nuevo para que el cambio sea claro */}
-      <p style={{ fontSize: "0.85rem", color: "#777", marginBottom: "0.75rem" }}>
-        Usa el filtro para ver solo las tareas pendientes, en progreso o completadas.
+      {/* Texto informativo */}
+      <p
+        style={{
+          fontSize: "0.85rem",
+          color: "#777",
+          marginBottom: "0.75rem",
+        }}
+      >
+        Usa el filtro para ver solo las tareas pendientes, en progreso o
+        completadas.
       </p>
 
       {filteredTasks.length === 0 ? (
-        <p>No hay tareas que coincidan con el filtro seleccionado.</p>
+        <p>
+          No hay tareas que coincidan con el filtro seleccionado. Prueba con
+          otro estado o quita el filtro.
+        </p>
       ) : (
         <table border="1" cellPadding="8" cellSpacing="0">
           <thead>
