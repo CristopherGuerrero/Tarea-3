@@ -16,7 +16,7 @@ function TaskList({ tasks, onEdit, onDelete }) {
     <div>
       <h2>Listado de tareas</h2>
 
-      {/* ===== FILTRO POR ESTADO ===== */}
+      {/* Filtro por estado */}
       <div style={{ marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
         <label>Filtrar tareas por estado:</label>
         <select
@@ -29,11 +29,16 @@ function TaskList({ tasks, onEdit, onDelete }) {
           <option value="completada">Completada</option>
         </select>
         <span style={{ fontSize: "0.9rem", color: "#555" }}>
-          Mostrando <strong>{totalFiltradas}</strong> de <strong>{totalTareas}</strong> tareas
+          Mostrando <strong>{totalFiltradas}</strong> de{" "}
+          <strong>{totalTareas}</strong> tareas
         </span>
       </div>
 
-      {/* ===== MENSAJE SI NO HAY TAREAS ===== */}
+      {/* Texto informativo nuevo para que el cambio sea claro */}
+      <p style={{ fontSize: "0.85rem", color: "#777", marginBottom: "0.75rem" }}>
+        Usa el filtro para ver solo las tareas pendientes, en progreso o completadas.
+      </p>
+
       {filteredTasks.length === 0 ? (
         <p>No hay tareas que coincidan con el filtro seleccionado.</p>
       ) : (
