@@ -71,6 +71,14 @@ app.delete('/tasks/:id', (req, res) => {
   res.status(204).send();
 });
 
+app.get('/status', (req, res) => {
+  res.json({
+    status: 'ok',
+    message: 'API funcionando correctamente',
+    totalTasks: tasks.length
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor backend listo en http://localhost:${PORT}`);
 });
