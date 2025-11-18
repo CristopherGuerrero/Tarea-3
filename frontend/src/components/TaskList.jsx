@@ -29,14 +29,7 @@ function TaskList({ tasks, onEdit, onDelete }) {
       <h2>Listado de tareas</h2>
 
       {/* Filtro por estado */}
-      <div
-        style={{
-          marginBottom: "1rem",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.75rem",
-        }}
-      >
+      <div className="filtro-wrapper">
         <label>Filtrar tareas por estado:</label>
         <select
           value={filter}
@@ -71,7 +64,7 @@ function TaskList({ tasks, onEdit, onDelete }) {
           otro estado o quita el filtro.
         </p>
       ) : (
-        <table border="1" cellPadding="8" cellSpacing="0">
+        <table>
           <thead>
             <tr>
               <th>ID</th>
@@ -84,13 +77,21 @@ function TaskList({ tasks, onEdit, onDelete }) {
           <tbody>
             {filteredTasks.map((t) => (
               <tr key={t.id}>
-                <td>{t.id}</td>
-                <td>{t.title}</td>
-                <td>{t.description}</td>
-                <td>{t.status}</td>
-                <td>
-                  <button onClick={() => onEdit(t)}>Editar</button>
+                <td data-label="ID">{t.id}</td>
+                <td data-label="Título">{t.title}</td>
+                <td data-label="Descripción">{t.description}</td>
+                <td data-label="Estado">
+                  <span className={`status ${t.status}`}>{t.status}</span>
+                </td>
+                <td data-label="Acciones">
                   <button
+                    className="edit"
+                    onClick={() => onEdit(t)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="delete"
                     onClick={() => onDelete(t.id)}
                     style={{ marginLeft: "0.5rem" }}
                   >
